@@ -50,10 +50,11 @@ customInfo: 托管于<i class="fab fa-github-alt"></i><a href="https://pages.git
 
 # Select all your webfont in a CDN like Google Fonts, and then copy `href` property in the `<link>` tag, like `link: //fonts.googleapis.com/css?family=Lato|Roboto+Condensed|Skranji|Ubuntu|Ubuntu+Mono`.
 # Then set different fonts to different parts here.
+
 customFont:
-  enable: false
-  link:
-  all:
+  enable: true
+  link: //fonts.googleapis.com/css?family=Press+Start+2P
+  all: Press Start 2P
   title:
   subtitle:
   main:
