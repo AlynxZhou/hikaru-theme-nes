@@ -1,0 +1,31 @@
+@import "variables";
+@import "nib";
+.main {
+  font: $font-size $font-main;
+  .main-container {
+    width: auto;
+    display: flex;
+    if (getThemeConfig("sidebar") == "left") {
+      flex-direction: row-reverse;
+    } else if (getThemeConfig("sidebar") == "right") {
+      flex-direction: row;
+    }
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    padding: 0;
+    .content {
+      flex: 1 0 auto;
+      // Keep this or it will expand!
+      width: 75%;
+    }
+  }
+  @media (max-width: $media-main-fold-width) {
+    .main-container {
+      flex-direction: column;
+      .content {
+        width: 100%;
+      }
+    }
+  }
+}

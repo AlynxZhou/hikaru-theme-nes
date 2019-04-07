@@ -1,0 +1,61 @@
+home: Home
+index: Home
+archive: Archive
+archives: Archives
+category: Category
+categories: Categories
+tag: Tag
+tags: Tags
+about: About
+
+search: Search
+comment: Comment
+toc: Table of Contents
+socialLink: Social Links
+blogroll: Blogroll
+
+# readmore: Read More
+
+clipboard:
+  copy: Copy
+  copied: Copied
+
+reward:
+  reward: Reward
+  weChatPay: WechatPay
+  aliPay: AliPay
+  bitCoin: BitCoin
+
+postCount:
+  none: You have no post, write now!
+  one: You have %d post, keep on!
+  more: You have %d posts!
+
+tagCount:
+  none: You have no tag, create now！
+  one: You have %d tag, keep on!
+  more: You have %d tags!
+
+categoryCount:
+  none: You have no category, create now!
+  one: You have %d category, keep on!
+  more: You have %d categories!
+
+commentjs:
+  none: This page has no comment, go to comment now!
+  comment: Go to Comment
+
+valine:
+  placeholder: Write your comment here...
+
+poweredBy: Proudly Powered by %s
+theme: Theme is %s
+
+accessibility:
+  prevPage: Previous Page
+  nextPage: Next Page
+  backToTop: Back to Top
+  navToggle: Toggle Navbar
+  sitePV: Site Visit Count
+  siteUV: Site User Count
+  pagePV: Page Click Count

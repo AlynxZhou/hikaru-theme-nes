@@ -1,0 +1,51 @@
+{% extends "layout.njk" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ getPath("css/page.css") }}">
+<link rel="stylesheet" type="text/css" href="{{ getPath("css/post.css") }}">
+{% endblock %}
+
+{% block title %}{{ __(title) }} | {{ siteConfig.title }}{% if siteConfig.subtitle %} - {{ siteConfig.subtitle }}{% endif %}{% endblock %}
+
+{% block content %}
+<div id="categories" class="categories page">
+  <article class="article post card nes-container">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">{{ __(title) }}</h1>
+    </header>
+    <main class="post-main">
+      <h2 class="page-counter">
+        {% if site.categoriesLength > 1 %}
+        {{ __("categoryCount.more", site.categoriesLength) }}
+        {% elif site.categories.length === 1 %}
+        {{ __("categoryCount.one", site.categoriesLength) }}
+        {% else %}
+        {{ __("categoryCount.none") }}
+        {% endif %}
+      </h2>
+      <div class="categories-list">
+        {% macro listCategory(cates) %}
+        <ul>
+        {% for cate in cates %}
+          <li>
+            <a href="{{ getPath(cate.docPath) }}">{{ cate.name }}</a> <span>{{ cate.posts.length }}</span>
+            {% if cate.subs.length > 0 %}
+            {{ listCategory(cate.subs) }}
+            {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+        {% endmacro %}
+        {{ listCategory(categories) }}
+      </div>
+    </main>
+    <footer class="post-footer"></footer>
+  </article>
+  {% if themeConfig.reward.enable %}
+  {% include "reward.njk" %}
+  {% endif %}
+  {% if themeConfig.comment.enable %}
+  {% include "comment.njk" %}
+  {% endif %}
+</div>
+{% endblock %}

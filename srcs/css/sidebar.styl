@@ -1,0 +1,108 @@
+@import "variables";
+@import "nib";
+.sidebar {
+  flex: 1 0 auto;
+  width: 25%;
+  padding: 0;
+  word-wrap: break-word;
+  .search {
+    display: block;
+    text-align: center;
+    input {
+      width: 70%;
+      height: 1.8em;
+      border: none;
+      border-bottom: 0.1em dotted $color-search-font;
+      transition: 0.3s ease-in-out;
+      &:focus {
+        outline: none;
+        border-bottom: 0.1em solid $color-search-font;
+      }
+      &::placeholder {
+        color: $color-search-font;
+        opacity: 0.7;
+      }
+    }
+  }
+  .search-result-box {
+    display: none;
+    word-wrap: break-word;
+    transition: 0.3s ease-in-out;
+    .search-result-list {
+      margin-top: 0;
+      padding: 1em 1em 1em 2em;
+    }
+  }
+  .info {
+    text-align: center;
+    .author-avatar {
+      width: 90%;
+      display: block;
+      // Keep in center.
+      margin: 1em auto;
+      border: 0.3em solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 1em 0.5em rgba(0, 0, 0, 0.19);
+      transition: 1s ease-in-out;
+      &:hover {
+        transform: rotateY(720deg);
+      }
+    }
+    .author-name {
+      color: $color-author-name;
+      font-size: 1.8em;
+      font-weight: normal;
+      margin: 0.5em 0;
+    }
+    .author-description {
+      color: $color-author-description;
+      font-size: 1.2em;
+      font-weight: normal;
+      margin: 0.5em 0;
+    }
+    .rss {
+      margin: 1em 0;
+      padding: 0;
+      .rss-link {
+        display: block;
+        text-align: center;
+        font-size: 1.5em;
+        padding: 0.2em;
+        line-height: 1.25em;
+      }
+    }
+  }
+  .sidebar-item {
+    margin: 0.5em;
+  }
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding-bottom: 1em;
+  }
+  .post-toc .toc-link.active {
+    color: $color-link-hover;
+    border-bottom: 0.05em solid $color-link-hover;
+  }
+  @media (max-width: $media-main-fold-width) {
+    width: 100%;
+    .sidebar-item {
+      text-align: center;
+      ul {
+        padding: 0;
+        li {
+          display: inline-block;
+          margin: 0.5em 1em;
+        }
+      }
+      .toc {
+        text-align: left;
+        display: inline-block;
+      }
+    }
+    .sidebar-sticky {
+      position: static;
+    }
+  }
+}

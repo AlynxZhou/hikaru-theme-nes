@@ -1,0 +1,79 @@
+{% extends "layout.njk" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ getPath("css/page.css") }}">
+<link rel="stylesheet" type="text/css" href="{{ getPath("css/post.css") }}">
+{% endblock %}
+
+{% block title %}{{ title }} | {{ siteConfig.title }}{% if siteConfig.subtitle %} - {{ siteConfig.subtitle }}{% endif %}{% endblock %}
+
+{% block content %}
+<div id="post" class="page">
+  <article class="article post card nes-container" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="{{ getURL(docPath) }}">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="{{ siteConfig.author }}">
+        <meta itemprop="description" content="{{ siteConfig.description }}">
+        <meta itemprop="image" content="{{ getPath(themeConfig.avatar) }}">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="{{ siteConfig.title }}">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">{{ title }}</h1>
+      <div class="post-meta">
+        {% if createdTime %}
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="{{ createdTime.toISOString() }}">{{ createdMoment.tz(themeConfig["zone"] or zone).format("YYYY-MM-DD ddd HH:mm:ss z") }}</time></span>
+        </span>
+        {% endif %}
+        {% if categories and categories.length %}
+        <span class="post-categories meta-block">
+          {# About `-`: https://mozilla.github.io/nunjucks/cn/templating.html#part-861ece9d8e5ce60c #}
+          {% for cat in categories -%}
+          {% if loop.first %}<i class="far fa-folder-open"></i>{% else %}<i class="fas fa-angle-right"></i>{% endif %}<span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="{{ getPath(cat.docPath) }}" itemprop="url" rel="index"><span itemprop="name">{{ cat.name }}</span></a></span>
+          {%- endfor %}
+        </span>
+        {% endif %}
+        {% if comment !== false and themeConfig.comment.enable %}
+        {% if themeConfig.comment.disqusShortName %}
+        <span class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="{{ getPath(post.docPath) }}#disqus_thread" itemprop="discussionUrl"><span class="post-comment-count disqus-comment-count" data-disqus-identifier="{{ getPath(post.docPath) }}" itemprop="commentCount"></span></a></span>
+        </span>
+        {% endif %}
+        {% endif %}
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      {{ content }}
+    </main>
+    <footer class="post-footer">
+      {% if tags and tags.length %}
+      <div class="post-tags">
+        {% for tag in tags -%}
+        <a class="post-tag nes-btn" href="{{ getPath(tag.docPath) }}" rel="tag"><i class="fas fa-tag"></i>{{ tag.name }}</a>
+        {%- endfor %}
+      </div>
+      {% endif %}
+    </footer>
+  </article>
+  {% if prev or next %}
+  <nav class="page-nav">
+    {% if next %}
+    <a class="page-nav-next page-nav-item nes-btn" href="{{ getPath(next.docPath) }}" rel="next" title="{{ next.title }}"><i class="fas fa-angle-left"></i><span class="nav-title">{{ next.title }}</span></a>
+    {% endif %}
+    {% if prev %}
+    <a class="page-nav-prev page-nav-item nes-btn" href="{{ getPath(prev.docPath) }}" rel="prev" title="{{ prev.title }}"><span class="nav-title">{{ prev.title }}</span><i class="fas fa-angle-right"></i></a>
+    {% endif %}
+  </nav>
+  {% endif %}
+  {% if themeConfig.reward.enable %}
+  {% include "reward.njk" %}
+  {% endif %}
+  {% if themeConfig.comment.enable %}
+  {% include "comment.njk" %}
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+@import "variables";
+@import "nib";
+.footer {
+  margin-top: 1em;
+  .footer-container {
+    width: auto;
+    word-wrap: break-word;
+    line-height: 2em;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    .footer-left {
+      flex: 1 0 auto;
+      text-align: left;
+      width: 50%;
+    }
+    .footer-right {
+      flex: 1 0 auto;
+      text-align: right;
+      width: 50%;
+      .custom-info {
+        width: 100%;
+        word-wrap: break-word;
+      }
+    }
+  }
+  @media (max-width: $media-footer-header-nav-fold-width) {
+    .footer-container {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      .footer-left {
+        text-align: center;
+        width: auto;
+      }
+      .footer-right {
+        text-align: center;
+        width: auto;
+      }
+    }
+  }
+}

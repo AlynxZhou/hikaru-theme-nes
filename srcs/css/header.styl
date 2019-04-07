@@ -1,0 +1,105 @@
+@import "variables";
+@import "nib";
+.header {
+  .header-container {
+    padding: 1em;
+    margin: 1em 0;
+  }
+  .header-title {
+    margin: 0 1em;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    a {
+      color: $color-font;
+      text-decoration: none;
+      border-bottom: none;
+      &:hover {
+        color: $color-font;
+        border-bottom: none;
+      }
+      &:active {
+        top: 0;
+      }
+    }
+    .title {
+      font: bold 2em $font-title;
+      margin: 0 0 0.5em 0;
+      text-align: left;
+      flex: 1 0 auto;
+    }
+    .subtitle {
+      font: italic 1.5em $font-subtitle;
+      margin: 0.5em 0 0 0;
+      text-align: right;
+      flex: 1 0 auto;
+    }
+  }
+  .nav {
+    position: relative;
+    margin: 0;
+    padding: 0 0.5em;
+    ul {
+      display: block;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow: auto;
+      white-space: nowrap;
+      li {
+        line-height: 2em;
+        position: relative;
+        text-align: center;
+        display: inline-block;
+        margin: 0 0.1em;
+        a {
+          position: relative;
+          display: block;
+          font-size: 1.5em;
+          text-decoration: none;
+          transition: 0.2s ease-in-out;
+        }
+      }
+    }
+    .nav-toggle {
+      text-align: center;
+      font-size: 2em;
+      position: relative;
+      cursor: pointer;
+      display: none;
+      width: 100%;
+      text-align: center;
+      border-bottom: none;
+      &:hover {
+        border-bottom: none;
+        color: $color-nav-link-hover;
+      }
+    }
+  }
+  @media (max-width: $media-footer-header-nav-fold-width) {
+    .header-title {
+      flex-direction: column;
+    }
+    .nav-toggle {
+      display: inline-block;
+    }
+    ul {
+      display: none;
+      white-space: normal;
+      li {
+        display: block;
+        text-align: center
+        margin: 0.1em 0;
+        a {
+          position: relative;
+          border-bottom: none;
+          &:hover {
+          }
+        }
+      }
+    }
+  }
+}

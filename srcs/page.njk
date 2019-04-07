@@ -1,0 +1,67 @@
+{% if page.layout === "index" or page.title === "index" %}
+{% include "index.njk" %}
+{% elif page.layout === "archive" or page.title === "archive" %}
+{% include "archive.njk" %}
+{% elif page.layout === "categories" or page.title === "categories" %}
+{% include "categories.njk" %}
+{% elif page.layout === "category" or page.title === "category" %}
+{% include "category.njk" %}
+{% elif page.layout === "tags" or page.title === "tags" %}
+{% include "tags.njk" %}
+{% elif page.layout === "tag" or page.title === "tag" %}
+{% include "tag.njk" %}
+{% else %}
+{% extends "layout.njk" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ getPath("css/page.css") }}">
+<link rel="stylesheet" type="text/css" href="{{ getPath("css/post.css") }}">
+{% endblock %}
+
+{% block title %}{{ __(title) }} | {{ siteConfig.title }}{% if siteConfig.subtitle %} - {{ siteConfig.subtitle }}{% endif %}{% endblock %}
+
+{% block content %}
+<div id="page" class="page">
+  <article class="article post card nes-container">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="{{ getURL(docPath) }}">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="{{ siteConfig.author }}">
+        <meta itemprop="description" content="{{ siteConfig.description }}">
+        <meta itemprop="image" content="{{ getPath(themeConfig.avatar) }}">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="{{ siteConfig.title }}">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">{{ __(title) }}</h1>
+      <div class="post-meta">
+        {% if createdTime %}
+        <span class="post-date meta-block">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="{{ createdTime.toISOString() }}">{{ createdMoment.tz(themeConfig["zone"] or zone).format("YYYY-MM-DD ddd HH:mm:ss z") }}</time></span>
+        </span>
+        {% endif %}
+        {% if comment !== false and themeConfig.comment.enable %}
+        {% if themeConfig.comment.disqusShortName %}
+        <span class="post-comment-count meta-block">
+          <i class="far fa-comments"></i><span><a href="{{ getPath(post.docPath) }}#disqus_thread" itemprop="discussionUrl"><span class="post-comment-count disqus-comment-count" data-disqus-identifier="{{ getPath(post.docPath) }}" itemprop="commentCount"></span></a></span>
+        </span>
+        {% endif %}
+        {% endif %}
+      </div>
+    </header>
+    <main class="post-main">
+      {{ content }}
+    </main>
+    <footer class="post-footer"></footer>
+  </article>
+  {% if themeConfig.reward.enable %}
+  {% include "reward.njk" %}
+  {% endif %}
+  {% if themeConfig.comment.enable %}
+  {% include "comment.njk" %}
+  {% endif %}
+</div>
+{% endblock %}
+{% endif %}
